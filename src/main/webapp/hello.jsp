@@ -7,13 +7,31 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.red{
-background:red;
-padding:10px;
+.container{
+    display:flex;
+    gap:20px;
+    margin-top:20px;
 }
+
+.box{
+    width:50%;
+}
+
+.red{
+    background:#ff4d4d;
+    padding:15px;
+    color:white;
+    font-size:18px;
+}
+
 .green{
-background:green;
-padding:10px;
+    background:#2ecc71;
+    padding:15px;
+    color:white;
+    font-size:18px;
+}
+.new{
+ background: #013220;
 }
 </style>
 </head>
@@ -21,8 +39,9 @@ padding:10px;
 <form method="post">
   <input type="text" name="inp1"/>
   <button type="submit">Save</button>
+  <button type="reset">Clear</button>
 </form>
-
+<div class=box>
 <%String oldName="";
 String newName=request.getParameter("inp1");
 try{
@@ -36,15 +55,20 @@ try{
 	}
 	%>
 	<div class="red">
-	Old Value:<%= oldName %>
+	<%= oldName %>
 	</div>
 	
-	
 	<% 
-	if(newName!=null &&!newName.equals(oldName)){
+	if(newName!=null && !newName.equals("") &&!newName.equals(oldName)){
 	%>
+	</div>
+	<div class=box>
 	<div class="green">
-	New Value:<%=newName %>
+	<%=oldName %>
+	<br><br>
+	<div class="new">
+	 	<%=newName %>
+	</div>
 	</div>
 	<%
 	PreparedStatement ps=con.prepareStatement("update users set name=? where id=1");
@@ -57,5 +81,8 @@ try{
 	/* e.printStackTrace(); */
 }
 %>
+</div>
+</div>
 </body>
+
 </html>
